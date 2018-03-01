@@ -7,7 +7,7 @@
   (html/html-resource (java.net.URL. url)))
 
 (defn get-titles [nodes]
-  (map html/text (html/select nodes [:td.title :a])))
+  (map html/text (html/select nodes [:td.title :a.storylink])))
 
 (defn -main []
   (doseq [line (get-titles (fetch-url url))]
