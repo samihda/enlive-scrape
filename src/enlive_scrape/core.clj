@@ -1,5 +1,6 @@
 (ns enlive-scrape.core
-  (:require [net.cgrand.enlive-html :as html]))
+  (:require [net.cgrand.enlive-html :as html])
+  (:gen-class))
 
 (def url "https://news.ycombinator.com/")
 
