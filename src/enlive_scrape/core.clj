@@ -13,7 +13,7 @@
 ;; IO
 (defn print-stories []
   (def i (atom 0))
-  (doseq [story (map (fn [s] (str (swap! i inc) "\t" s))
+  (doseq [story (map #(str (swap! i inc) "\t" %)
                      (-> url fetch-url get-titles))]
     (println story)))
 
