@@ -10,6 +10,21 @@
 (defn get-titles [nodes]
   (map html/text (html/select nodes [:td.title :a.storylink])))
 
+;; IO
+(defn print-stories []
+  (def i (atom 0))
+  (doseq [story (map (fn [s] (str (swap! i inc) "\t" s))
+                     (-> url fetch-url get-titles))]
+    (println story)))
+
+(defn prompt []
+  (newline)
+  (println "Enter r to refresh or q to quit:")
+  (let [cmd (read-line)]
+    (cond (= 0 (compare "r" cmd)) (do (newline) (print-stories) (prompt))
+          (= 0 (compare "q" cmd)) (do (newline) (println "Bye!"))
+          :else (do (prompt)))))
+
 (defn -main []
-  (doseq [line (get-titles (fetch-url url))]
-    (println line)))
+  (print-stories)
+  (prompt))
